@@ -1,0 +1,17 @@
+{
+  "name": "Herta 手机端",
+  "short_name": "Herta",
+  "description": "在手机上遥控 PC 上的 Herta：对话、批准命令、查看会话",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1116",
+  "theme_color": "#0d1116",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

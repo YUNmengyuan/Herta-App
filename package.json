@@ -1,0 +1,15 @@
+{
+  "name": "herta-remote",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "把桌面版 Herta 变成手机可用的 PWA（局域网遥控端，零侵入）",
+  "main": "bridge/server.mjs",
+  "scripts": {
+    "start": "node bridge/server.mjs",
+    "selftest": "node tools/selftest.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

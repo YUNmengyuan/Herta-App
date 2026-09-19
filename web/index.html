@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+    <meta name="theme-color" content="#0d1116" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eef6f9" media="(prefers-color-scheme: light)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Herta" />
+    <title>Herta 手机端</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.png" />
+    <link rel="apple-touch-icon" href="./icon.png" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 顶栏 -->
+      <header class="bar">
+        <button class="icon-btn" id="btn-drawer" aria-label="会话列表">☰</button>
+        <div class="bar-title">
+          <div class="title-line" id="title">Herta</div>
+          <div class="sub-line"><span class="dot" id="link-dot"></span><span id="link-text">连接中…</span></div>
+        </div>
+        <button class="icon-btn" id="btn-menu" aria-label="更多">⋯</button>
+      </header>
+
+      <!-- 对话区 -->
+      <main class="transcript" id="transcript">
+        <div class="empty" id="empty">
+          <div class="empty-logo">Herta</div>
+          <p>正在连接 PC 上的 Herta…</p>
+        </div>
+      </main>
+
+      <!-- 只读提示条 -->
+      <div class="readonly-bar hidden" id="readonly-bar">
+        <span id="readonly-text">正在查看旧会话（只读）</span>
+        <button id="btn-takeover">接管并继续对话</button>
+      </div>
+
+      <!-- 审批卡片 -->
+      <section class="approval hidden" id="approval">
+        <div class="approval-head">
+          <span class="approval-badge">需要你批准</span>
+          <span class="approval-sum" id="approval-summary"></span>
+        </div>
+        <pre class="approval-body" id="approval-body"></pre>
+        <details class="approval-diff hidden" id="approval-diff-wrap">
+          <summary>查看改动</summary>
+          <pre id="approval-diff"></pre>
+        </details>
+        <div class="approval-actions">
+          <button class="danger" data-decision="deny">拒绝</button>
+          <button data-decision="allow" data-persistence="once">允许一次</button>
+          <button data-decision="allow" data-persistence="session">本次会话</button>
+          <button data-decision="allow" data-persistence="always">总是允许</button>
+        </div>
+      </section>
+
+      <!-- 输入区 -->
+      <footer class="composer">
+        <div class="staged hidden" id="staged"></div>
+        <div class="composer-row">
+          <button class="icon-btn" id="btn-image" aria-label="发送图片">＋</button>
+          <textarea id="input" rows="1" placeholder="对 Herta 说点什么…" enterkeyhint="send"></textarea>
+          <button class="send" id="btn-send" aria-label="发送">发送</button>
+          <button class="stop hidden" id="btn-stop" aria-label="打断">停止</button>
+        </div>
+        <input type="file" id="file" accept="image/*" multiple hidden />
+      </footer>
+    </div>
+
+    <!-- 会话抽屉 -->
+    <div class="scrim hidden" id="scrim"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-head">
+        <strong>会话</strong>
+        <button class="ghost" id="btn-new">新会话</button>
+      </div>
+      <div class="session-list" id="session-list"></div>
+      <div class="drawer-foot">
+        <div class="meta" id="meta-workspace">工作区：—</div>
+        <div class="meta" id="meta-version">Herta —</div>
+        <div class="row">
+          <button class="ghost" id="btn-theme">切换主题</button>
+          <button class="ghost" id="btn-rewind">撤回上一轮</button>
+        </div>
+        <div class="row">
+          <button class="ghost" id="btn-settings">API Key</button>
+          <button class="ghost danger-ghost" id="btn-reconnect">重连</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- PC 状态页（本机打开时显示） -->
+    <div class="pc-panel hidden" id="pc-panel">
+      <h1>Herta 手机端已启动</h1>
+      <p class="pc-hint">用手机扫码，或直接打开下面的地址（需要和这台电脑在同一个 Wi-Fi）。</p>
+      <div class="qr" id="qr"></div>
+      <div class="pc-url" id="pc-url">—</div>
+      <ul class="pc-meta" id="pc-meta"></ul>
+      <div class="row">
+        <button class="ghost" id="btn-copy">复制链接</button>
+        <button class="ghost" id="btn-enter">就在这台电脑上用</button>
+      </div>
+    </div>
+
+    <!-- 设置弹层 -->
+    <div class="sheet-wrap hidden" id="sheet-wrap">
+      <div class="sheet">
+        <h2>DeepSeek API Key</h2>
+        <p class="meta" id="key-status">—</p>
+        <input type="password" id="key-input" placeholder="sk-…" autocomplete="off" />
+        <div class="row">
+          <button class="ghost" id="btn-key-save">保存到 PC 上的 Herta</button>
+          <button class="ghost" id="btn-key-clear">清除</button>
+        </div>
+        <div class="row"><button class="ghost" id="btn-sheet-close">关闭</button></div>
+      </div>
+    </div>
+
+    <div class="toast hidden" id="toast"></div>
+
+    <script src="./vendor/qrcode.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
